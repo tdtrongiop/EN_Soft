@@ -1,0 +1,705 @@
+#include "ENFiberCal.h"
+
+ENFiberCal::ENFiberCal()
+{
+  char fn[20];
+  sprintf(fn,"fiber.prm");
+  flagprm = ReadParameters(fn);
+}
+// ***********************************************************************
+ENFiberCal::ENFiberCal(char* filename)
+{
+  flagprm = ReadParameters(filename);
+}
+// ***********************************************************************
+ENFiberCal::~ENFiberCal(){}
+// ***********************************************************************
+void  ENFiberCal::SetPosition(int start, int *rawin){
+  if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
+  for (int i=0;i<128;i++){
+     traw[i] = rawin[start+i];
+  }
+  SetPosition();
+}
+// ***********************************************************************
+void  ENFiberCal::SetPosition(){
+  if (flagprm<0) printf("  Khong doc dc prm file\n");
+  for (int i=0;i<128;i++){
+     tcal[i][0] = traw[i]*ch2ns[i];
+     tcal[i][1] = (trawt[i]-traw[i])*ch2ns[i]; 
+  }
+     //  memset(F1FIBER_time,0,sizeof(F1FIBER_time));
+     //  memset(posY,-50000.,sizeof(posY));
+       for(int i=0;i<305;i++) {posY[i]=-50000.;weiY[i]=-1E38;}
+     // 20141021 changed from sva02 to v7768 by S. Tera   
+	// 20141024 changed to NEW map 
+   	if(tcal[8][0]>threshold_t){  // MA2 1
+	
+	  if(tcal[105][0]>threshold_t) {posY[1]=tcal[8][0]-tcal[105][0]; weiY[1]=tcal[8][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[2]=tcal[8][0]-tcal[116][0]; weiY[2]=tcal[8][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[3]=tcal[8][0]-tcal[71][0];  weiY[3]=tcal[8][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[4]=tcal[8][0]-tcal[81][0];  weiY[4]=tcal[8][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[5]=tcal[8][0]-tcal[107][0]; weiY[5]=tcal[8][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[6]=tcal[8][0]-tcal[118][0]; weiY[6]=tcal[8][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[7]=tcal[8][0]-tcal[97][0];  weiY[7]=tcal[8][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[8]=tcal[8][0]-tcal[83][0];  weiY[8]=tcal[8][1]+tcal[83][1];}
+
+	}
+	
+	
+	if(tcal[9][0]>threshold_t){ //MA2 2
+	
+	  if(tcal[104][0]>threshold_t) {posY[257]=tcal[9][0]-tcal[104][0]; weiY[257]=tcal[9][1]+tcal[104][1];}
+	  if(tcal[115][0]>threshold_t) {posY[258]=tcal[9][0]-tcal[115][0]; weiY[258]=tcal[9][1]+tcal[115][1];}
+	  if(tcal[70][0]>threshold_t)  {posY[259]=tcal[9][0]-tcal[70][0];  weiY[259]=tcal[9][1]+tcal[70][1];}
+	  if(tcal[80][0]>threshold_t)  {posY[260]=tcal[9][0]-tcal[80][0];  weiY[260]=tcal[9][1]+tcal[80][1];}
+	  if(tcal[106][0]>threshold_t) {posY[261]=tcal[9][0]-tcal[106][0]; weiY[261]=tcal[9][1]+tcal[106][1];}
+	  if(tcal[117][0]>threshold_t) {posY[262]=tcal[9][0]-tcal[117][0]; weiY[262]=tcal[9][1]+tcal[117][1];}
+	  if(tcal[96][0]>threshold_t)  {posY[263]=tcal[9][0]-tcal[96][0];  weiY[263]=tcal[9][1]+tcal[96][1];}
+	  if(tcal[82][0]>threshold_t)  {posY[264]=tcal[9][0]-tcal[82][0];  weiY[264]=tcal[9][1]+tcal[82][1];}
+	  
+	}
+	
+	if(tcal[19][0]>threshold_t){ //MA2 3
+	
+	  if(tcal[105][0]>threshold_t) {posY[9] =tcal[19][0]-tcal[105][0]; weiY[9] =tcal[19][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[10]=tcal[19][0]-tcal[116][0]; weiY[10]=tcal[19][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[11]=tcal[19][0]-tcal[71][0];  weiY[11]=tcal[19][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[12]=tcal[19][0]-tcal[81][0];  weiY[12]=tcal[19][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[13]=tcal[19][0]-tcal[107][0]; weiY[13]=tcal[19][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[14]=tcal[19][0]-tcal[118][0]; weiY[14]=tcal[19][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[15]=tcal[19][0]-tcal[97][0];  weiY[15]=tcal[19][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[16]=tcal[19][0]-tcal[83][0];  weiY[16]=tcal[19][1]+tcal[83][1];}
+	
+	}
+	
+	if(tcal[20][0]>threshold_t){ //MA2 4
+	
+	  if(tcal[104][0]>threshold_t) {posY[265]=tcal[20][0]-tcal[104][0]; weiY[265]=tcal[20][1]+tcal[104][1];}
+	  if(tcal[115][0]>threshold_t) {posY[266]=tcal[20][0]-tcal[115][0]; weiY[266]=tcal[20][1]+tcal[115][1];}
+	  if(tcal[70][0]>threshold_t)  {posY[267]=tcal[20][0]-tcal[70][0];  weiY[267]=tcal[20][1]+tcal[70][1];}
+	  if(tcal[80][0]>threshold_t)  {posY[268]=tcal[20][0]-tcal[80][0];  weiY[268]=tcal[20][1]+tcal[80][1];}
+	  if(tcal[106][0]>threshold_t) {posY[269]=tcal[20][0]-tcal[106][0]; weiY[269]=tcal[20][1]+tcal[106][1];}
+	  if(tcal[117][0]>threshold_t) {posY[270]=tcal[20][0]-tcal[117][0]; weiY[270]=tcal[20][1]+tcal[117][1];}
+	  if(tcal[96][0]>threshold_t)  {posY[271]=tcal[20][0]-tcal[96][0];  weiY[271]=tcal[20][1]+tcal[96][1];}
+	  if(tcal[82][0]>threshold_t)  {posY[272]=tcal[20][0]-tcal[82][0];  weiY[272]=tcal[20][1]+tcal[82][1];}
+	
+	}
+	
+	
+	if(tcal[6][0]>threshold_t){  //MA2 5
+	
+	  if(tcal[105][0]>threshold_t) {posY[17]=tcal[6][0]-tcal[105][0]; weiY[17]=tcal[6][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[18]=tcal[6][0]-tcal[116][0]; weiY[18]=tcal[6][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[19]=tcal[6][0]-tcal[71][0];  weiY[19]=tcal[6][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[20]=tcal[6][0]-tcal[81][0];  weiY[20]=tcal[6][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[21]=tcal[6][0]-tcal[107][0]; weiY[21]=tcal[6][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[22]=tcal[6][0]-tcal[118][0]; weiY[22]=tcal[6][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[23]=tcal[6][0]-tcal[97][0];  weiY[23]=tcal[6][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[24]=tcal[6][0]-tcal[83][0];  weiY[24]=tcal[6][1]+tcal[83][1];}
+	
+	}
+	
+	
+	if(tcal[7][0]>threshold_t){ //MA2 6
+	
+	  if(tcal[104][0]>threshold_t) {posY[273]=tcal[7][0]-tcal[104][0]; weiY[273]=tcal[7][1]+tcal[104][1];}
+	  if(tcal[115][0]>threshold_t) {posY[274]=tcal[7][0]-tcal[115][0]; weiY[274]=tcal[7][1]+tcal[115][1];}
+	  if(tcal[70][0]>threshold_t)  {posY[275]=tcal[7][0]-tcal[70][0];  weiY[275]=tcal[7][1]+tcal[70][1];}
+	  if(tcal[80][0]>threshold_t)  {posY[276]=tcal[7][0]-tcal[80][0];  weiY[276]=tcal[7][1]+tcal[80][1];}
+	  if(tcal[106][0]>threshold_t) {posY[277]=tcal[7][0]-tcal[106][0]; weiY[277]=tcal[7][1]+tcal[106][1];}
+	  if(tcal[117][0]>threshold_t) {posY[278]=tcal[7][0]-tcal[117][0]; weiY[278]=tcal[7][1]+tcal[117][1];}
+	  if(tcal[96][0]>threshold_t)  {posY[279]=tcal[7][0]-tcal[96][0];  weiY[279]=tcal[7][1]+tcal[96][1];}
+	  if(tcal[82][0]>threshold_t)  {posY[280]=tcal[7][0]-tcal[82][0];  weiY[280]=tcal[7][1]+tcal[82][1];}
+	
+	}
+	
+	
+	if(tcal[48][0]>threshold_t){  //MA2 7
+	
+	  if(tcal[105][0]>threshold_t) {posY[25]=tcal[48][0]-tcal[105][0]; weiY[25]=tcal[48][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[26]=tcal[48][0]-tcal[116][0]; weiY[26]=tcal[48][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[27]=tcal[48][0]-tcal[71][0];  weiY[27]=tcal[48][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[28]=tcal[48][0]-tcal[81][0];  weiY[28]=tcal[48][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[29]=tcal[48][0]-tcal[107][0]; weiY[29]=tcal[48][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[30]=tcal[48][0]-tcal[118][0]; weiY[30]=tcal[48][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[31]=tcal[48][0]-tcal[97][0];  weiY[31]=tcal[48][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[32]=tcal[48][0]-tcal[83][0];  weiY[32]=tcal[48][1]+tcal[83][1];}
+	
+	}
+	
+	
+	if(tcal[49][0]>threshold_t){ //MA2 8
+	
+	  if(tcal[104][0]>threshold_t) {posY[281]=tcal[49][0]-tcal[104][0]; weiY[281]=tcal[49][1]+tcal[104][1];}
+	  if(tcal[115][0]>threshold_t) {posY[282]=tcal[49][0]-tcal[115][0]; weiY[282]=tcal[49][1]+tcal[115][1];}
+	  if(tcal[70][0]>threshold_t)  {posY[283]=tcal[49][0]-tcal[70][0];  weiY[283]=tcal[49][1]+tcal[70][1];}
+	  if(tcal[80][0]>threshold_t)  {posY[284]=tcal[49][0]-tcal[80][0];  weiY[284]=tcal[49][1]+tcal[80][1];}
+	  if(tcal[106][0]>threshold_t) {posY[285]=tcal[49][0]-tcal[106][0]; weiY[285]=tcal[49][1]+tcal[106][1];}
+	  if(tcal[117][0]>threshold_t) {posY[286]=tcal[49][0]-tcal[117][0]; weiY[286]=tcal[49][1]+tcal[117][1];}
+	  if(tcal[96][0]>threshold_t)  {posY[287]=tcal[49][0]-tcal[96][0];  weiY[287]=tcal[49][1]+tcal[96][1];}
+	  if(tcal[82][0]>threshold_t)  {posY[288]=tcal[49][0]-tcal[82][0];  weiY[288]=tcal[49][1]+tcal[82][1];}
+	
+	}
+	
+	
+	if(tcal[10][0]>threshold_t){  //MA2 9
+	
+	  if(tcal[105][0]>threshold_t) {posY[33]=tcal[10][0]-tcal[105][0]; weiY[33]=tcal[10][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[34]=tcal[10][0]-tcal[116][0]; weiY[34]=tcal[10][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[35]=tcal[10][0]-tcal[71][0];  weiY[35]=tcal[10][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[36]=tcal[10][0]-tcal[81][0];  weiY[36]=tcal[10][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[37]=tcal[10][0]-tcal[107][0]; weiY[37]=tcal[10][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[38]=tcal[10][0]-tcal[118][0]; weiY[38]=tcal[10][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[39]=tcal[10][0]-tcal[97][0];  weiY[39]=tcal[10][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[40]=tcal[10][0]-tcal[83][0];  weiY[40]=tcal[10][1]+tcal[83][1];}
+	
+	}
+	
+	
+	if(tcal[11][0]>threshold_t){  //MA2 10
+	
+	  if(tcal[104][0]>threshold_t) {posY[289]=tcal[11][0]-tcal[104][0]; weiY[289]=tcal[11][1]+tcal[104][1];}
+	  if(tcal[115][0]>threshold_t) {posY[290]=tcal[11][0]-tcal[115][0]; weiY[290]=tcal[11][1]+tcal[115][1];}
+	  if(tcal[70][0]>threshold_t)  {posY[291]=tcal[11][0]-tcal[70][0];  weiY[291]=tcal[11][1]+tcal[70][1];}
+	  if(tcal[80][0]>threshold_t)  {posY[292]=tcal[11][0]-tcal[80][0];  weiY[292]=tcal[11][1]+tcal[80][1];}
+	  if(tcal[106][0]>threshold_t) {posY[293]=tcal[11][0]-tcal[106][0]; weiY[293]=tcal[11][1]+tcal[106][1];}
+	  if(tcal[117][0]>threshold_t) {posY[294]=tcal[11][0]-tcal[117][0]; weiY[294]=tcal[11][1]+tcal[117][1];}
+	  if(tcal[96][0]>threshold_t)  {posY[295]=tcal[11][0]-tcal[96][0];  weiY[295]=tcal[11][1]+tcal[96][1];}
+	  if(tcal[82][0]>threshold_t)  {posY[296]=tcal[11][0]-tcal[82][0];  weiY[296]=tcal[11][1]+tcal[82][1];}
+	
+	}
+	
+	
+	
+	if(tcal[21][0]>threshold_t){  //MA2 11
+	
+	  if(tcal[105][0]>threshold_t) {posY[41]=tcal[21][0]-tcal[105][0]; weiY[41]=tcal[21][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[42]=tcal[21][0]-tcal[116][0]; weiY[42]=tcal[21][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[43]=tcal[21][0]-tcal[71][0];  weiY[43]=tcal[21][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[44]=tcal[21][0]-tcal[81][0];  weiY[44]=tcal[21][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[45]=tcal[21][0]-tcal[107][0]; weiY[45]=tcal[21][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[46]=tcal[21][0]-tcal[118][0]; weiY[46]=tcal[21][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[47]=tcal[21][0]-tcal[97][0];  weiY[47]=tcal[21][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[48]=tcal[21][0]-tcal[83][0];  weiY[48]=tcal[21][1]+tcal[83][1];}
+	
+	}
+	
+	
+	if(tcal[22][0]>threshold_t){ //MA2 12
+ 	
+	  if(tcal[104][0]>threshold_t) {posY[297]=tcal[22][0]-tcal[104][0]; weiY[297]=tcal[22][1]+tcal[104][1];}
+	  if(tcal[115][0]>threshold_t) {posY[298]=tcal[22][0]-tcal[115][0]; weiY[298]=tcal[22][1]+tcal[115][1];}
+	  if(tcal[70][0]>threshold_t)  {posY[299]=tcal[22][0]-tcal[70][0];  weiY[299]=tcal[22][1]+tcal[70][1];}
+	  if(tcal[80][0]>threshold_t)  {posY[300]=tcal[22][0]-tcal[80][0];  weiY[300]=tcal[22][1]+tcal[80][1];}
+	  if(tcal[106][0]>threshold_t) {posY[301]=tcal[22][0]-tcal[106][0]; weiY[301]=tcal[22][1]+tcal[106][1];}
+	  if(tcal[117][0]>threshold_t) {posY[302]=tcal[22][0]-tcal[117][0]; weiY[302]=tcal[22][1]+tcal[117][1];}
+	  if(tcal[96][0]>threshold_t)  {posY[303]=tcal[22][0]-tcal[96][0];  weiY[303]=tcal[22][1]+tcal[96][1];}
+		
+	
+	}
+	
+	
+	if(tcal[32][0]>threshold_t){ //MA2 13
+	
+	  if(tcal[105][0]>threshold_t) {posY[49]=tcal[32][0]-tcal[105][0]; weiY[49]=tcal[32][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[50]=tcal[32][0]-tcal[116][0]; weiY[50]=tcal[32][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[51]=tcal[32][0]-tcal[71][0];  weiY[51]=tcal[32][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[52]=tcal[32][0]-tcal[81][0];  weiY[52]=tcal[32][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[53]=tcal[32][0]-tcal[107][0]; weiY[53]=tcal[32][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[54]=tcal[32][0]-tcal[118][0]; weiY[54]=tcal[32][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[55]=tcal[32][0]-tcal[97][0];  weiY[55]=tcal[32][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[56]=tcal[32][0]-tcal[83][0];  weiY[56]=tcal[32][1]+tcal[83][1];}
+	
+	}
+	
+	
+	
+	if(tcal[50][0]>threshold_t){ //MA2 15
+	
+	  if(tcal[105][0]>threshold_t) {posY[57]=tcal[50][0]-tcal[105][0]; weiY[57]=tcal[50][1]+tcal[105][1];}
+	  if(tcal[116][0]>threshold_t) {posY[58]=tcal[50][0]-tcal[116][0]; weiY[58]=tcal[50][1]+tcal[116][1];}
+	  if(tcal[71][0]>threshold_t)  {posY[59]=tcal[50][0]-tcal[71][0];  weiY[59]=tcal[50][1]+tcal[71][1];}
+	  if(tcal[81][0]>threshold_t)  {posY[60]=tcal[50][0]-tcal[81][0];  weiY[60]=tcal[50][1]+tcal[81][1];}
+	  if(tcal[107][0]>threshold_t) {posY[61]=tcal[50][0]-tcal[107][0]; weiY[61]=tcal[50][1]+tcal[107][1];}
+	  if(tcal[118][0]>threshold_t) {posY[62]=tcal[50][0]-tcal[118][0]; weiY[62]=tcal[50][1]+tcal[118][1];}
+	  if(tcal[97][0]>threshold_t)  {posY[63]=tcal[50][0]-tcal[97][0];  weiY[63]=tcal[50][1]+tcal[97][1];}
+	  if(tcal[83][0]>threshold_t)  {posY[64]=tcal[50][0]-tcal[83][0];  weiY[64]=tcal[50][1]+tcal[83][1];}
+	  
+	}
+
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	if(tcal[12][0]>threshold_t){ //MA2 17
+	
+	  if(tcal[108][0]>threshold_t) {posY[65]=tcal[12][0]-tcal[108][0]; weiY[65]=tcal[12][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[66]=tcal[12][0]-tcal[119][0]; weiY[66]=tcal[12][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[67]=tcal[12][0]-tcal[98][0];  weiY[67]=tcal[12][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[68]=tcal[12][0]-tcal[85][0];  weiY[68]=tcal[12][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[69]=tcal[12][0]-tcal[109][0]; weiY[69]=tcal[12][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[70]=tcal[12][0]-tcal[64][0];  weiY[70]=tcal[12][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[71]=tcal[12][0]-tcal[99][0];  weiY[71]=tcal[12][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[72]=tcal[12][0]-tcal[87][0];  weiY[72]=tcal[12][1]+tcal[87][1];}
+	  
+	}
+	
+	
+	if(tcal[23][0]>threshold_t){ //MA2 19
+	
+	  if(tcal[108][0]>threshold_t) {posY[73]=tcal[23][0]-tcal[108][0]; weiY[73]=tcal[23][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[74]=tcal[23][0]-tcal[119][0]; weiY[74]=tcal[23][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[75]=tcal[23][0]-tcal[98][0];  weiY[75]=tcal[23][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[76]=tcal[23][0]-tcal[85][0];  weiY[76]=tcal[23][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[77]=tcal[23][0]-tcal[109][0]; weiY[77]=tcal[23][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[78]=tcal[23][0]-tcal[64][0];  weiY[78]=tcal[23][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[79]=tcal[23][0]-tcal[99][0];  weiY[79]=tcal[23][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[80]=tcal[23][0]-tcal[87][0];  weiY[80]=tcal[23][1]+tcal[87][1];}
+	
+	}
+	
+	
+	if(tcal[34][0]>threshold_t){//MA2 21
+	
+	  if(tcal[108][0]>threshold_t) {posY[81]=tcal[34][0]-tcal[108][0]; weiY[81]=tcal[34][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[82]=tcal[34][0]-tcal[119][0]; weiY[82]=tcal[34][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[83]=tcal[34][0]-tcal[98][0];  weiY[83]=tcal[34][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[84]=tcal[34][0]-tcal[85][0];  weiY[84]=tcal[34][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[85]=tcal[34][0]-tcal[109][0]; weiY[85]=tcal[34][1]+tcal[109][1];} 
+	  if(tcal[64][0]>threshold_t)  {posY[86]=tcal[34][0]-tcal[64][0];  weiY[86]=tcal[34][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[87]=tcal[34][0]-tcal[99][0];  weiY[87]=tcal[34][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[88]=tcal[34][0]-tcal[87][0];  weiY[88]=tcal[34][1]+tcal[87][1];}
+	
+	}
+	
+	
+	if(tcal[52][0]>threshold_t){//MA2 23
+	
+	  if(tcal[108][0]>threshold_t) {posY[89]=tcal[52][0]-tcal[108][0]; weiY[89]=tcal[52][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[90]=tcal[52][0]-tcal[119][0]; weiY[90]=tcal[52][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[91]=tcal[52][0]-tcal[98][0];  weiY[91]=tcal[52][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[92]=tcal[52][0]-tcal[85][0];  weiY[92]=tcal[52][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[93]=tcal[52][0]-tcal[109][0]; weiY[93]=tcal[52][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[94]=tcal[52][0]-tcal[64][0];  weiY[94]=tcal[52][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[95]=tcal[52][0]-tcal[99][0];  weiY[95]=tcal[52][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[96]=tcal[52][0]-tcal[87][0];  weiY[96]=tcal[52][1]+tcal[87][1];}
+	
+	}
+	
+	
+		
+	if(tcal[13][0]>threshold_t){//MA2 25
+	
+	  if(tcal[108][0]>threshold_t) {posY[97]=tcal[13][0]-tcal[108][0]; weiY[97]=tcal[13][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[98]=tcal[13][0]-tcal[119][0]; weiY[98]=tcal[13][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[99]=tcal[13][0]-tcal[98][0];  weiY[99]=tcal[13][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[100]=tcal[13][0]-tcal[85][0]; weiY[100]=tcal[13][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[101]=tcal[13][0]-tcal[109][0]; weiY[101]=tcal[13][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[102]=tcal[13][0]-tcal[64][0]; weiY[102]=tcal[13][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[103]=tcal[13][0]-tcal[99][0]; weiY[103]=tcal[13][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[104]=tcal[13][0]-tcal[87][0]; weiY[104]=tcal[13][1]+tcal[87][1];}
+	
+	}
+	
+	
+	if(tcal[0][0]>threshold_t){//MA2 27
+	
+	  if(tcal[108][0]>threshold_t) {posY[105]=tcal[0][0]-tcal[108][0]; weiY[105]=tcal[0][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[106]=tcal[0][0]-tcal[119][0]; weiY[106]=tcal[0][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[107]=tcal[0][0]-tcal[98][0];  weiY[107]=tcal[0][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[108]=tcal[0][0]-tcal[85][0];  weiY[108]=tcal[0][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[109]=tcal[0][0]-tcal[109][0]; weiY[109]=tcal[0][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[110]=tcal[0][0]-tcal[64][0];  weiY[110]=tcal[0][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[111]=tcal[0][0]-tcal[99][0];  weiY[111]=tcal[0][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[112]=tcal[0][0]-tcal[87][0];  weiY[112]=tcal[0][1]+tcal[87][1];}
+	
+	}
+	
+	
+	if(tcal[35][0]>threshold_t){//MA2 29
+	
+	  if(tcal[108][0]>threshold_t) {posY[113]=tcal[35][0]-tcal[108][0]; weiY[113]=tcal[35][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[114]=tcal[35][0]-tcal[119][0]; weiY[114]=tcal[35][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[115]=tcal[35][0]-tcal[98][0];  weiY[115]=tcal[35][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[116]=tcal[35][0]-tcal[85][0];  weiY[116]=tcal[35][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[117]=tcal[35][0]-tcal[109][0]; weiY[117]=tcal[35][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[118]=tcal[35][0]-tcal[64][0];  weiY[118]=tcal[35][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[119]=tcal[35][0]-tcal[99][0];  weiY[119]=tcal[35][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[120]=tcal[35][0]-tcal[87][0];  weiY[120]=tcal[35][1]+tcal[87][1];}
+	
+	}
+	
+	if(tcal[54][0]>threshold_t){//MA2 31
+	
+	  if(tcal[108][0]>threshold_t) {posY[121]=tcal[54][0]-tcal[108][0]; weiY[121]=tcal[54][1]+tcal[108][1];}
+	  if(tcal[119][0]>threshold_t) {posY[122]=tcal[54][0]-tcal[119][0]; weiY[122]=tcal[54][1]+tcal[119][1];}
+	  if(tcal[98][0]>threshold_t)  {posY[123]=tcal[54][0]-tcal[98][0];  weiY[123]=tcal[54][1]+tcal[98][1];}
+	  if(tcal[85][0]>threshold_t)  {posY[124]=tcal[54][0]-tcal[85][0];  weiY[124]=tcal[54][1]+tcal[85][1];}
+	  if(tcal[109][0]>threshold_t) {posY[125]=tcal[54][0]-tcal[109][0]; weiY[125]=tcal[54][1]+tcal[109][1];}
+	  if(tcal[64][0]>threshold_t)  {posY[126]=tcal[54][0]-tcal[64][0];  weiY[126]=tcal[54][1]+tcal[64][1];}
+	  if(tcal[99][0]>threshold_t)  {posY[127]=tcal[54][0]-tcal[99][0];  weiY[127]=tcal[54][1]+tcal[99][1];}
+	  if(tcal[87][0]>threshold_t)  {posY[128]=tcal[54][0]-tcal[87][0];  weiY[128]=tcal[54][1]+tcal[87][1];}
+	
+	}
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	if(tcal[14][0]>threshold_t){//MA2 33
+	
+	  if(tcal[110][0]>threshold_t) {posY[129]=tcal[14][0]-tcal[110][0]; weiY[129]=tcal[14][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[130]=tcal[14][0]-tcal[65][0];  weiY[130]=tcal[14][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[131]=tcal[14][0]-tcal[100][0]; weiY[131]=tcal[14][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[132]=tcal[14][0]-tcal[89][0];  weiY[132]=tcal[14][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[133]=tcal[14][0]-tcal[111][0]; weiY[133]=tcal[14][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[134]=tcal[14][0]-tcal[66][0];  weiY[134]=tcal[14][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[135]=tcal[14][0]-tcal[101][0]; weiY[135]=tcal[14][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[136]=tcal[14][0]-tcal[91][0];  weiY[136]=tcal[14][1]+tcal[91][1];}
+	  
+	}
+	
+	
+	if(tcal[1][0]>threshold_t){//MA2 35
+	
+	  if(tcal[110][0]>threshold_t) {posY[137]=tcal[1][0]-tcal[110][0]; weiY[137]=tcal[1][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[138]=tcal[1][0]-tcal[65][0];  weiY[138]=tcal[1][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[139]=tcal[1][0]-tcal[100][0]; weiY[139]=tcal[1][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[140]=tcal[1][0]-tcal[89][0];  weiY[140]=tcal[1][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[141]=tcal[1][0]-tcal[111][0]; weiY[141]=tcal[1][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[142]=tcal[1][0]-tcal[66][0];  weiY[142]=tcal[1][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[143]=tcal[1][0]-tcal[101][0]; weiY[143]=tcal[1][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[144]=tcal[1][0]-tcal[91][0];  weiY[144]=tcal[1][1]+tcal[91][1];}
+	
+	}
+	
+	
+	if(tcal[36][0]>threshold_t){//MA2 37
+	
+	  if(tcal[110][0]>threshold_t) {posY[145]=tcal[36][0]-tcal[110][0]; weiY[145]=tcal[36][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[146]=tcal[36][0]-tcal[65][0];  weiY[146]=tcal[36][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[147]=tcal[36][0]-tcal[100][0]; weiY[147]=tcal[36][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[148]=tcal[36][0]-tcal[89][0];  weiY[148]=tcal[36][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[149]=tcal[36][0]-tcal[111][0]; weiY[149]=tcal[36][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[150]=tcal[36][0]-tcal[66][0];  weiY[150]=tcal[36][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[151]=tcal[36][0]-tcal[101][0]; weiY[151]=tcal[36][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[152]=tcal[36][0]-tcal[91][0];  weiY[152]=tcal[36][1]+tcal[91][1];}
+	  
+	}
+	
+	
+	
+	if(tcal[56][0]>threshold_t){//MA2 39
+	  
+	  if(tcal[110][0]>threshold_t) {posY[153]=tcal[56][0]-tcal[110][0]; weiY[153]=tcal[56][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[154]=tcal[56][0]-tcal[65][0];  weiY[154]=tcal[56][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[155]=tcal[56][0]-tcal[100][0]; weiY[155]=tcal[56][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[156]=tcal[56][0]-tcal[89][0];  weiY[156]=tcal[56][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[157]=tcal[56][0]-tcal[111][0]; weiY[157]=tcal[56][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[158]=tcal[56][0]-tcal[66][0];  weiY[158]=tcal[56][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[159]=tcal[56][0]-tcal[101][0]; weiY[159]=tcal[56][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[160]=tcal[56][0]-tcal[91][0];  weiY[160]=tcal[56][1]+tcal[91][1];}
+	  
+	}
+	
+	
+	
+	if(tcal[16][0]>threshold_t){//MA2 41
+	  
+	  if(tcal[110][0]>threshold_t) {posY[161]=tcal[16][0]-tcal[110][0]; weiY[161]=tcal[16][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[162]=tcal[16][0]-tcal[65][0];  weiY[162]=tcal[16][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[163]=tcal[16][0]-tcal[100][0]; weiY[163]=tcal[16][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[164]=tcal[16][0]-tcal[89][0];  weiY[164]=tcal[16][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[165]=tcal[16][0]-tcal[111][0]; weiY[165]=tcal[16][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[166]=tcal[16][0]-tcal[66][0];  weiY[166]=tcal[16][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[167]=tcal[16][0]-tcal[101][0]; weiY[167]=tcal[16][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[168]=tcal[16][0]-tcal[91][0];  weiY[168]=tcal[16][1]+tcal[91][1];}
+	  
+	}
+	
+	if(tcal[2][0]>threshold_t){//MA2 43
+	  
+	  if(tcal[110][0]>threshold_t) {posY[169]=tcal[2][0]-tcal[110][0]; weiY[169]=tcal[2][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[170]=tcal[2][0]-tcal[65][0];  weiY[170]=tcal[2][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[171]=tcal[2][0]-tcal[100][0]; weiY[171]=tcal[2][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[172]=tcal[2][0]-tcal[89][0];  weiY[172]=tcal[2][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[173]=tcal[2][0]-tcal[111][0]; weiY[173]=tcal[2][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[174]=tcal[2][0]-tcal[66][0];  weiY[174]=tcal[2][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[175]=tcal[2][0]-tcal[101][0]; weiY[175]=tcal[2][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[176]=tcal[2][0]-tcal[91][0];  weiY[176]=tcal[2][1]+tcal[91][1];}
+	  
+	}
+	
+	
+	if(tcal[37][0]>threshold_t){//MA2 45
+	  
+	  if(tcal[110][0]>threshold_t) {posY[177]=tcal[37][0]-tcal[110][0]; weiY[177]=tcal[37][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[178]=tcal[37][0]-tcal[65][0];  weiY[178]=tcal[37][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[179]=tcal[37][0]-tcal[100][0]; weiY[179]=tcal[37][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[180]=tcal[37][0]-tcal[89][0];  weiY[180]=tcal[37][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[181]=tcal[37][0]-tcal[111][0]; weiY[181]=tcal[37][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[182]=tcal[37][0]-tcal[66][0];  weiY[182]=tcal[37][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[183]=tcal[37][0]-tcal[101][0]; weiY[183]=tcal[37][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[184]=tcal[37][0]-tcal[91][0];  weiY[184]=tcal[37][1]+tcal[91][1];}
+	  
+	}
+	
+	
+	
+	if(tcal[58][0]>threshold_t){//MA2 47
+	   
+	  if(tcal[110][0]>threshold_t) {posY[185]=tcal[58][0]-tcal[110][0]; weiY[185]=tcal[58][1]+tcal[110][1];}
+	  if(tcal[65][0]>threshold_t)  {posY[186]=tcal[58][0]-tcal[65][0];  weiY[186]=tcal[58][1]+tcal[65][1];}
+	  if(tcal[100][0]>threshold_t) {posY[187]=tcal[58][0]-tcal[100][0]; weiY[187]=tcal[58][1]+tcal[100][1];}
+	  if(tcal[89][0]>threshold_t)  {posY[188]=tcal[58][0]-tcal[89][0];  weiY[188]=tcal[58][1]+tcal[89][1];}
+	  if(tcal[111][0]>threshold_t) {posY[189]=tcal[58][0]-tcal[111][0]; weiY[189]=tcal[58][1]+tcal[111][1];}
+	  if(tcal[66][0]>threshold_t)  {posY[190]=tcal[58][0]-tcal[66][0];  weiY[190]=tcal[58][1]+tcal[66][1];}
+	  if(tcal[101][0]>threshold_t) {posY[191]=tcal[58][0]-tcal[101][0]; weiY[191]=tcal[58][1]+tcal[101][1];}
+	  if(tcal[91][0]>threshold_t)  {posY[192]=tcal[58][0]-tcal[91][0];  weiY[192]=tcal[58][1]+tcal[91][1];}
+	
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	if(tcal[15][0]>threshold_t){ //MA2 49
+	
+	  if(tcal[112][0]>threshold_t) {posY[193]=tcal[15][0]-tcal[112][0]; weiY[193]=tcal[15][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[194]=tcal[15][0]-tcal[67][0];  weiY[194]=tcal[15][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[195]=tcal[15][0]-tcal[102][0]; weiY[195]=tcal[15][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[196]=tcal[15][0]-tcal[93][0];  weiY[196]=tcal[15][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[197]=tcal[15][0]-tcal[113][0]; weiY[197]=tcal[15][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[198]=tcal[15][0]-tcal[68][0];  weiY[198]=tcal[15][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[199]=tcal[15][0]-tcal[103][0]; weiY[199]=tcal[15][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[200]=tcal[15][0]-tcal[95][0];  weiY[200]=tcal[15][1]+tcal[95][1];}
+	  
+	}
+	
+	
+	if(tcal[3][0]>threshold_t){ //MA2 51
+	
+	  if(tcal[112][0]>threshold_t) {posY[201]=tcal[3][0]-tcal[112][0]; weiY[201]=tcal[3][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[202]=tcal[3][0]-tcal[67][0];  weiY[202]=tcal[3][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[203]=tcal[3][0]-tcal[102][0]; weiY[203]=tcal[3][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[204]=tcal[3][0]-tcal[93][0];  weiY[204]=tcal[3][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[205]=tcal[3][0]-tcal[113][0]; weiY[205]=tcal[3][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[206]=tcal[3][0]-tcal[68][0];  weiY[206]=tcal[3][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[207]=tcal[3][0]-tcal[103][0]; weiY[207]=tcal[3][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[208]=tcal[3][0]-tcal[95][0];  weiY[208]=tcal[3][1]+tcal[95][1];}
+	  
+	}
+	
+	
+	if(tcal[38][0]>threshold_t){ //MA2 53
+	
+	  if(tcal[112][0]>threshold_t) {posY[209]=tcal[38][0]-tcal[112][0]; weiY[209]=tcal[38][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[210]=tcal[38][0]-tcal[67][0];  weiY[210]=tcal[38][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[211]=tcal[38][0]-tcal[102][0]; weiY[211]=tcal[38][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[212]=tcal[38][0]-tcal[93][0];  weiY[212]=tcal[38][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[213]=tcal[38][0]-tcal[113][0]; weiY[213]=tcal[38][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[214]=tcal[38][0]-tcal[68][0];  weiY[214]=tcal[38][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[215]=tcal[38][0]-tcal[103][0]; weiY[215]=tcal[38][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[216]=tcal[38][0]-tcal[95][0];  weiY[216]=tcal[38][1]+tcal[95][1];}
+	
+	}
+	
+	
+	if(tcal[60][0]>threshold_t){ //MA2 55
+	   
+	  if(tcal[112][0]>threshold_t) {posY[217]=tcal[60][0]-tcal[112][0]; weiY[217]=tcal[60][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[218]=tcal[60][0]-tcal[67][0];  weiY[218]=tcal[60][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[219]=tcal[60][0]-tcal[102][0]; weiY[219]=tcal[60][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[220]=tcal[60][0]-tcal[93][0];  weiY[220]=tcal[60][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[221]=tcal[60][0]-tcal[113][0]; weiY[221]=tcal[60][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[222]=tcal[60][0]-tcal[68][0];  weiY[222]=tcal[60][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[223]=tcal[60][0]-tcal[103][0]; weiY[223]=tcal[60][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[224]=tcal[60][0]-tcal[95][0];  weiY[224]=tcal[60][1]+tcal[95][1];}
+	  
+	}
+	
+	
+	if(tcal[17][0]>threshold_t){ //MA2 57
+	
+	  if(tcal[112][0]>threshold_t) {posY[225]=tcal[17][0]-tcal[112][0]; weiY[225]=tcal[17][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[226]=tcal[17][0]-tcal[67][0];  weiY[226]=tcal[17][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[227]=tcal[17][0]-tcal[102][0]; weiY[227]=tcal[17][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[228]=tcal[17][0]-tcal[93][0];  weiY[228]=tcal[17][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[229]=tcal[17][0]-tcal[113][0]; weiY[229]=tcal[17][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[230]=tcal[17][0]-tcal[68][0];  weiY[230]=tcal[17][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[231]=tcal[17][0]-tcal[103][0]; weiY[231]=tcal[17][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[232]=tcal[17][0]-tcal[95][0];  weiY[232]=tcal[17][1]+tcal[95][1];}
+	
+	}
+	
+	
+	if(tcal[4][0]>threshold_t){ //MA2 59
+	
+	  if(tcal[112][0]>threshold_t) {posY[233]=tcal[4][0]-tcal[112][0];  weiY[233]=tcal[4][1]+tcal[112][1];} 
+	  if(tcal[67][0]>threshold_t)  {posY[234]=tcal[4][0]-tcal[67][0];   weiY[234]=tcal[4][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[235]=tcal[4][0]-tcal[102][0];  weiY[235]=tcal[4][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[236]=tcal[4][0]-tcal[93][0];   weiY[236]=tcal[4][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[237]=tcal[4][0]-tcal[113][0]; weiY[237]=tcal[4][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[238]=tcal[4][0]-tcal[68][0];   weiY[238]=tcal[4][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[239]=tcal[4][0]-tcal[103][0];  weiY[239]=tcal[4][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[240]=tcal[4][0]-tcal[95][0];   weiY[240]=tcal[4][1]+tcal[95][1];}
+	  
+	}
+	
+	
+	if(tcal[39][0]>threshold_t){ //MA2 61
+	
+	  if(tcal[112][0]>threshold_t) {posY[241]=tcal[39][0]-tcal[112][0]; weiY[241]=tcal[39][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[242]=tcal[39][0]-tcal[67][0];  weiY[242]=tcal[39][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[243]=tcal[39][0]-tcal[102][0]; weiY[243]=tcal[39][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[244]=tcal[39][0]-tcal[93][0];  weiY[244]=tcal[39][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[245]=tcal[39][0]-tcal[113][0]; weiY[245]=tcal[39][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[246]=tcal[39][0]-tcal[68][0];  weiY[246]=tcal[39][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[247]=tcal[39][0]-tcal[103][0]; weiY[247]=tcal[39][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[248]=tcal[39][0]-tcal[95][0];  weiY[248]=tcal[39][1]+tcal[95][1];}
+	  
+	}
+	
+	
+	if(tcal[62][0]>threshold_t){ //MA2 63
+	  
+	  if(tcal[112][0]>threshold_t) {posY[249]=tcal[62][0]-tcal[112][0]; weiY[249]=tcal[62][1]+tcal[112][1];}
+	  if(tcal[67][0]>threshold_t)  {posY[250]=tcal[62][0]-tcal[67][0];  weiY[250]=tcal[62][1]+tcal[67][1];}
+	  if(tcal[102][0]>threshold_t) {posY[251]=tcal[62][0]-tcal[102][0]; weiY[251]=tcal[62][1]+tcal[102][1];}
+	  if(tcal[93][0]>threshold_t)  {posY[252]=tcal[62][0]-tcal[93][0];  weiY[252]=tcal[62][1]+tcal[93][1];}
+	  if(tcal[113][0]>threshold_t) {posY[253]=tcal[62][0]-tcal[113][0]; weiY[253]=tcal[62][1]+tcal[113][1];}
+	  if(tcal[68][0]>threshold_t)  {posY[254]=tcal[62][0]-tcal[68][0];  weiY[254]=tcal[62][1]+tcal[68][1];}
+	  if(tcal[103][0]>threshold_t) {posY[255]=tcal[62][0]-tcal[103][0]; weiY[255]=tcal[62][1]+tcal[103][1];}
+	  if(tcal[95][0]>threshold_t)  {posY[256]=tcal[62][0]-tcal[95][0];  weiY[256]=tcal[62][1]+tcal[95][1];}
+	  
+	}
+
+	posX = -1000;posY1=-1000;
+        double weimax = -1E38;
+        int npos =0;
+        width = -100000;
+	for(int i=0;i<304;i++){
+            if (abs(posY[i]) < threshold_Y && weiY[i]>weimax) {
+                posX = (i - 150)*ns2mm[0] - offset[0];
+		posY1=posY[i]*ns2mm[1] - offset[1];
+                weimax=weiY[i];
+   		width = weimax;
+                npos++;
+  //              printf("F1  be  %d %f  %f  %f \n",npos,posX,posY1,weiY[i]);
+	    } 
+        }
+//      if (npos>1) 
+//printf("F1  %d  %f  %f\n",npos,posX,posY1);
+}
+// ***********************************************************************
+int ENFiberCal::ReadParameters(char* filename){
+  
+  fi.open(filename,ios::in);
+  if (fi.is_open()){
+     int valread[5];
+     char* buff;
+     // read map data
+     buff = GetNextLine('#');if (buff ==NULL) goto l20;
+     if (Put2Array(buff,valread,3) == -1) goto l20;
+     segid = valread[0];
+     detid = valread[1];
+     modid = valread[2];
+      // read threshold data
+     buff = GetNextLine('#');if (buff ==NULL) goto l20;
+     if (Put2Array(buff,valread,2) == -1) goto l20;
+     threshold_t = valread[0];
+     threshold_Y = valread[1];
+      // read calib ns2mm data
+     buff = GetNextLine('#');if (buff ==NULL) goto l20;
+     if (Put2Array(buff,ns2mm,2) == -1) goto l20;
+      // read offsetval data
+     buff = GetNextLine('#');if (buff ==NULL) goto l20;
+     if (Put2Array(buff,offset,2) == -1) goto l20;
+     for (int i=0;i<128;i++) ch2ns[i]=1;
+     fi.close();
+     printf("ENFiberCal: Parameters file :\"%s\" |--> LOADED!!!.\n",filename); 
+     return 0;
+  }else{
+     printf("ENFiberCal: Parameters file :\"%s\" cannot open |--> NOT load!!!\n",filename);
+     goto def;
+  }
+l20:  printf("ENFiberCal: Parameters file :\"%s\" not true format |--> NOT load!!!\n",filename);
+def:
+  for (int i=0;i<128;i++) ch2ns[i]=1; 
+   threshold_t = 100;
+   threshold_Y = 1000;
+   ns2mm={0.5,1};
+   offset={0,0};
+  return -1;
+}
+
+// ***********************************************************************
+char* ENFiberCal::ltrim (char s[])
+{
+    while (*s == 32) s++;
+    return s;
+}
+// *********************************************************************** 
+char* ENFiberCal::rtrim (char s[])
+{
+    int i = 0;
+    while (s[i]) i++ ;
+    while (s[i-1]==32) i--;
+    s[i] = 0 ;
+    return s;  
+}
+// ***********************************************************************
+char * ENFiberCal::trim (char s[])
+{
+    return ltrim(rtrim(s));  
+}
+// ***********************************************************************
+int ENFiberCal::Put2Array(char*s,double* val,int nval){
+  int nf =0;
+  s = trim(s);
+  char * pch;
+  pch = strtok (s," 	");
+  while (pch != NULL && nf<nval)
+  {
+    val[nf] = atof(pch);
+    pch = strtok (NULL, " 	");
+    nf++;
+  }
+  if (pch != NULL) strcpy(s,pch);
+  if (nf<nval) return -1;
+  return 0;
+}
+// ***********************************************************************
+int ENFiberCal::Put2Array(char* s,int* val,int nval){
+  int nf =0;
+  s = trim(s);
+  char * pch;
+  pch = strtok (s," 	");
+  while (pch != NULL && nf<nval)
+  {
+    val[nf] = atoi(pch);
+    pch = strtok (NULL, " 	");
+    nf++;
+  }
+  if (pch != NULL) strcpy(s,pch);
+  if (nf<nval) return -1;
+  return 0;
+}
+// ***********************************************************************
+char* ENFiberCal::GetNextLine(char s){
+   char buffer[1000];
+   char* buff; 
+//   ifstream fi;
+    while (1)
+    {
+        if (fi.eof()) return NULL;
+        buffer[0] = '\0';
+        fi.getline(buffer, 1000, '\n');
+        buff=trim(buffer);
+        if (strlen(buff) > 0)
+        {
+            if (buff[0] != s)
+            {
+                return buff;
+            }
+        }
+    }
+    return NULL; 
+}
+// ***********************************************************************
