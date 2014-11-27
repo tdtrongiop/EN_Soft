@@ -1,0 +1,634 @@
+36,39c36,37
+<    F3_d_ppac_l_t(0), F3_d_ppac_d_t(0), F3_d_ppac_r_t(0),F3_d_ppac_u_t(0), F3_d_ppac_a_t(0),
+<    F2_u_ppac_pos(0),F2_d_ppac_pos(0),F2_u_ppac_pos_X(0),F2_d_ppac_pos_X(0), 
+<    F3_u_ppac_pos(0),F3_d_ppac_pos(0),F3_u_ppac_pos_X(0),F3_d_ppac_pos_X(0), 
+<    F2_u_ppac_pos_Y(0),F2_d_ppac_pos_Y(0),F3_u_ppac_pos_Y(0),F3_d_ppac_pos_Y(0)
+---
+>    F2_d_ppac_pos(0), F2_u_ppac_pos(0),F3_u_ppac_pos(0),F2_d_ppac_pos_X(0), F2_u_ppac_pos_X(0),F3_u_ppac_pos_X(0), F2_d_ppac_pos_Y(0),F2_u_ppac_pos_Y(0),F3_u_ppac_pos_Y(0) 
+>   
+46,52d43
+<    /*
+<    F2_u_ppac_l_t(0), F2_u_ppac_d_t(0), F2_u_ppac_r_t(0),F2_u_ppac_u_t(0), F2_u_ppac_a_t(0),
+<    F2_d_ppac_l_t(0), F2_d_ppac_d_t(0), F2_d_ppac_r_t(0),F2_d_ppac_u_t(0), F2_d_ppac_a_t(0),
+<    F3_u_ppac_l_t(0), F3_u_ppac_d_t(0), F3_u_ppac_r_t(0),F3_u_ppac_u_t(0), F3_u_ppac_a_t(0),
+<    F2_d_ppac_pos(0), F2_u_ppac_pos(0),F3_u_ppac_pos(0),F2_d_ppac_pos_X(0), F2_u_ppac_pos_X(0),
+<    F3_u_ppac_pos_X(0), F2_d_ppac_pos_Y(0),F2_u_ppac_pos_Y(0),F3_u_ppac_pos_Y(0)
+<    */
+56,59c47
+<    F3_d_ppac_l_t(0), F3_d_ppac_d_t(0), F3_d_ppac_r_t(0),F3_d_ppac_u_t(0), F3_d_ppac_a_t(0),
+<    F2_u_ppac_pos(0),F2_d_ppac_pos(0),F2_u_ppac_pos_X(0),F2_d_ppac_pos_X(0), 
+<    F3_u_ppac_pos(0),F3_d_ppac_pos(0),F3_u_ppac_pos_X(0),F3_d_ppac_pos_X(0), 
+<    F2_u_ppac_pos_Y(0),F2_d_ppac_pos_Y(0),F3_u_ppac_pos_Y(0),F3_d_ppac_pos_Y(0)  // TETSUYA ADD 28052014
+---
+>    F2_d_ppac_pos(0), F2_u_ppac_pos(0),F3_u_ppac_pos(0),F2_d_ppac_pos_X(0), F2_u_ppac_pos_X(0),F3_u_ppac_pos_X(0), F2_d_ppac_pos_Y(0),F2_u_ppac_pos_Y(0),F3_u_ppac_pos_Y(0)
+125,133c113,114
+< 
+<    // TETSUYA e407 28052014 ADD
+<    F3_d_ppac_l_t     = MakeTH1('I', "Sort/F3/F3_D_PPAC_L", "F3_Downstream_PPAC_Left_Time", 4000, 1., 50000.);
+<    F3_d_ppac_d_t     = MakeTH1('I', "Sort/F3/F3_D_PPAC_D", "F3_Downstream_PPAC_Down_Time", 4000, 1., 50000.);
+<    F3_d_ppac_r_t     = MakeTH1('I', "Sort/F3/F3_D_PPAC_R", "F3_Downstream_PPAC_Right_Time", 4000, 1., 50000.);
+<    F3_d_ppac_u_t     = MakeTH1('I', "Sort/F3/F3_D_PPAC_U", "F3_Downstream_PPAC_Up_Time", 4000, 1., 50000.); 
+<    F3_d_ppac_a_t     = MakeTH1('I', "Sort/F3/F3_D_PPAC_A", "F3_Downstream_PPAC_Anode_Time", 4000, 1., 50000.);
+<    // ------------------------------
+< 
+---
+>    
+>    
+137,142d117
+<    // TETSUYA e407  28052014 ADD
+<    F3_d_ppac_pos     = MakeTH2('I', "Sort/F3/F3_D_POS","F3_Downstream_PPAC_position",1000, -2000., 2000., 1000, -2000., 2000.);
+<    // ------------------------------
+< 
+<    F2_u_ppac_pos_X  =  MakeTH1('I', "Sort/F2/F2_U_POS_X","F2_Upstream_PPAC_position_X",1000, -2000., 2000.);
+<    F2_d_ppac_pos_X  =  MakeTH1('I', "Sort/F2/F2_D_POS_X","F2_Downstream_PPAC_position_X",1000, -2000., 2000.);
+143a119,120
+>    F2_d_ppac_pos_X  =  MakeTH1('I', "Sort/F2/F2_D_POS_X","F2_Downstream_PPAC_position_X",1000, -2000., 2000.);
+>    F2_u_ppac_pos_X  =  MakeTH1('I', "Sort/F2/F2_U_POS_X","F2_Upstream_PPAC_position_X",1000, -2000., 2000.);
+145,147d121
+<    // TETSUYA e407  28052014 ADD
+<    F3_d_ppac_pos_X  =  MakeTH1('I', "Sort/F3/F3_D_POS_X","F3_Downstream_PPAC_position_X",1000, -2000., 2000.);
+<    // ------------------------------
+149d122
+<    F2_u_ppac_pos_Y =   MakeTH1('I', "Sort/F2/F2_U_POS_Y","F2_Upstream_PPAC_position_Y",1000, -2000., 2000.);
+151c124
+< 
+---
+>    F2_u_ppac_pos_Y =   MakeTH1('I', "Sort/F2/F2_U_POS_Y","F2_Upstream_PPAC_position_Y",1000, -2000., 2000.);
+153,156c126,127
+<    // TETSUYA e407  28052014 ADD
+<    F3_d_ppac_pos_Y =   MakeTH1('I', "Sort/F3/F3_D_POS_Y","F3_Downstream_PPAC_position_Y",1000, -2000., 2000.); 
+<    // ------------------------------
+<    
+---
+> 
+> 
+164,171c135,137
+<    F2_PID_Raw_Si     =  MakeTH2('I', "Sort/F2/F2_PID_Raw_Si","F2_PID_Raw_Si",
+< 				100, 46000., 46500.,1000,1., 4096.);
+<    // TETSUYA e407  28052014 ADD CHKER
+<    // F3_Sil            =  MakeTH1('I', "Sort/F3/F3_Sil", "F3_Silicon", 4096, 1., 4096.);
+<    // F3_PID_Scint_Si  =  MakeTH2('I', "Sort/F3/F3_PID_Scint_Pla","F3_PID_Scint_Pla",  
+<    // 1000, 1., 4096., 1000,1.,4096.);
+<    // ------------------------------
+< 
+---
+>    F2_PID_Raw_Si     =  MakeTH2('I', "Sort/F2/F2_PID_Raw_Si","F2_PID_Raw_Si",100, 46000., 46500.,1000,1., 4096.);
+>    F2_PID_Raw_Scint  =  MakeTH2('I', "Sort/F2/F2_PID_Raw_Scint","F2_PID_Raw_Scint",100, 46000., 46500., 1000,1.,4096.);
+>    
+176a143,145
+> 
+> 
+>    
+232c201,208
+<    Int_t cnt(0); 
+---
+>    Int_t cnt(0);
+> 
+>    
+> 
+>  	
+> 
+> 
+>  
+241c217
+<    // FIBER detector assignment Yassid 28052014
+---
+> 	// FIBER detector assignment Yassid 28052014
+861,872c837,838
+<    /* F2PPAC Sorting for E407 Yassid 28052014 */   
+<    out_evt-> F2UPPAC_L = inp_evt->v7768_tdc[15][0][0];
+<    out_evt-> F2UPPAC_D = inp_evt->v7768_tdc[15][1][0];
+<    out_evt-> F2UPPAC_R = inp_evt->v7768_tdc[15][2][0];
+<    out_evt-> F2UPPAC_U = inp_evt->v7768_tdc[15][3][0];
+<    out_evt-> F2UPPAC_A = inp_evt->v7768_tdc[15][4][0];
+<   
+<    out_evt-> F2DPPAC_L = inp_evt->v7768_tdc[15][5][0];
+<    out_evt-> F2DPPAC_D = inp_evt->v7768_tdc[15][6][0];
+<    out_evt-> F2DPPAC_R = inp_evt->v7768_tdc[15][7][0];
+<    out_evt-> F2DPPAC_U = inp_evt->v7768_tdc[15][8][0];
+<    out_evt-> F2DPPAC_A = inp_evt->v7768_tdc[15][9][0];
+---
+>     /* F2PPAC Sorting for E407 Yassid 28052014 */
+> 
+873a840,849
+>     out_evt-> F2UPPAC_L = inp_evt->v7768_tdc[15][0][0];
+>     out_evt-> F2UPPAC_D = inp_evt->v7768_tdc[15][1][0];
+>     out_evt-> F2UPPAC_R = inp_evt->v7768_tdc[15][2][0];
+>     out_evt-> F2UPPAC_U = inp_evt->v7768_tdc[15][3][0];
+>     out_evt-> F2UPPAC_A = inp_evt->v7768_tdc[15][4][0];
+>     out_evt-> F2DPPAC_L = inp_evt->v7768_tdc[15][5][0];
+>     out_evt-> F2DPPAC_D = inp_evt->v7768_tdc[15][6][0];
+>     out_evt-> F2DPPAC_R = inp_evt->v7768_tdc[15][7][0];
+>     out_evt-> F2DPPAC_U = inp_evt->v7768_tdc[15][8][0];
+>     out_evt-> F2DPPAC_A = inp_evt->v7768_tdc[15][9][0];
+880,892c856,857
+<     // 28052014 TETSUYA   ADD
+<     out_evt-> F3UPPAC_L = inp_evt->v7768_tdc[15][16][0];
+<     out_evt-> F3UPPAC_D = inp_evt->v7768_tdc[15][17][0];
+<     out_evt-> F3UPPAC_R = inp_evt->v7768_tdc[15][18][0];
+<     out_evt-> F3UPPAC_U = inp_evt->v7768_tdc[15][19][0];
+<     out_evt-> F3UPPAC_A = inp_evt->v7768_tdc[15][20][0];	
+< 
+<     out_evt-> F3DPPAC_L = inp_evt->v7768_tdc[15][21][0];
+<     out_evt-> F3DPPAC_D = inp_evt->v7768_tdc[15][22][0];
+<     out_evt-> F3DPPAC_R = inp_evt->v7768_tdc[15][23][0];
+<     out_evt-> F3DPPAC_U = inp_evt->v7768_tdc[15][24][0];
+<     out_evt-> F3DPPAC_A = inp_evt->v7768_tdc[15][25][0];	
+<     // --------------------------
+---
+> 	
+> 
+950,952c915
+<     out_evt-> PPAC_Trg = inp_evt->sva01[16][30];	/****/
+<     out_evt-> F2_Silicon = inp_evt->vmi01[7][0];	/***/
+<     //    out_evt-> F3_Silicon = inp_evt->vmi01[7][1];	// 28052014 TETSUYA ADD FOR THE CHK
+---
+>     out_evt->PPAC_Trg = inp_evt->sva01[16][30];	/****/
+954,957c917,924
+<     // Yassid 28092013 13:47 F2 Scintillator signals added
+<     
+<     out_evt-> F2_Scint_Q = inp_evt->sva01[20][13];	/****/
+<     out_evt-> F2_Scint_T = inp_evt->sva01[16][31];	/****/
+---
+>     out_evt-> F2_Silicon = inp_evt->vmi01[7][0];	/***/
+>    
+>    // Yassid 28092013 13:47 F2 Scintillator signals added
+>    
+>  out_evt-> F2_Scint_Q = inp_evt->sva01[20][13];	/****/
+>  out_evt-> F2_Scint_T = inp_evt->sva01[16][31];	/****/
+>    
+>    
+959c926
+<     //out_evt->F2_RF   = inp_evt->vmi01_tdc[5][14][0];  /// Yassid IMPORTANT, see TArtProc.cxx for these channels
+---
+>    //out_evt->F2_RF   = inp_evt->vmi01_tdc[5][14][0];  /// Yassid IMPORTANT, see TArtProc.cxx for these channels
+963,970c930,937
+<     out_evt->F2_Tref = inp_evt->sva01_tdc[10][15][0];	//E490
+<     
+<     F2_PID_Raw_Si->Fill(out_evt->F2_RF - out_evt->F2_Tref,out_evt->F2_Scint_Q);	/****/
+<     F2_PID_Raw_Scint->Fill(out_evt->F2_RF - out_evt->F2_Tref,out_evt->F2_Scint_Q);	/******/
+<     // F2_PID_Raw_Scint->Fill(inp_evt->vmi01_tdc[5][14][0] - inp_evt->vmi01_tdc[5][12][0],inp_evt->sva01[20][13] );
+<     
+<     F2_RaF->Fill(out_evt->F2_RF - out_evt->F2_Tref);	/*****/
+<     F2_Tref_TDC->Fill(out_evt->F2_Tref);	/*****/
+---
+>  out_evt->F2_Tref = inp_evt->sva01_tdc[10][15][0];	//E490
+>    
+>  F2_PID_Raw_Si->Fill(out_evt->F2_RF - out_evt->F2_Tref,out_evt->F2_Scint_Q);	/****/
+>  F2_PID_Raw_Scint->Fill(out_evt->F2_RF - out_evt->F2_Tref,out_evt->F2_Scint_Q);	/******/
+> 	   // F2_PID_Raw_Scint->Fill(inp_evt->vmi01_tdc[5][14][0] - inp_evt->vmi01_tdc[5][12][0],inp_evt->sva01[20][13] );
+> 	    
+>  F2_RaF->Fill(out_evt->F2_RF - out_evt->F2_Tref);	/*****/
+>  F2_Tref_TDC->Fill(out_evt->F2_Tref);	/*****/
+988,1012d954
+< 	    // 28052014 TETSUYA ADD
+< 	    if(out_evt-> F3UPPAC_L>0) F3_u_ppac_l_t->Fill(out_evt-> F3UPPAC_L);
+< 	    if(out_evt-> F3UPPAC_D>0) F3_u_ppac_d_t->Fill(out_evt-> F3UPPAC_D);
+< 	    if(out_evt-> F3UPPAC_R>0) F3_u_ppac_r_t->Fill(out_evt-> F3UPPAC_R);
+< 	    if(out_evt-> F3UPPAC_U>0) F3_u_ppac_u_t->Fill(out_evt-> F3UPPAC_U);
+< 	    if(out_evt-> F3UPPAC_A>0) F3_u_ppac_a_t->Fill(out_evt-> F3UPPAC_A); 
+< 
+< 	    if(out_evt-> F3DPPAC_L>0) F3_d_ppac_l_t->Fill(out_evt-> F3DPPAC_L);
+< 	    if(out_evt-> F3DPPAC_D>0) F3_d_ppac_d_t->Fill(out_evt-> F3DPPAC_D);
+< 	    if(out_evt-> F3DPPAC_R>0) F3_d_ppac_r_t->Fill(out_evt-> F3DPPAC_R);
+< 	    if(out_evt-> F3DPPAC_U>0) F3_d_ppac_u_t->Fill(out_evt-> F3DPPAC_U);
+< 	    if(out_evt-> F3DPPAC_A>0) F3_d_ppac_a_t->Fill(out_evt-> F3DPPAC_A); 
+< 	    // ---------------------------
+< 
+< 	    if(out_evt-> F2DPPAC_L>0 && out_evt-> F2DPPAC_R>0) 
+< 	      F2_d_ppac_pos_X->Fill(out_evt-> F2DPPAC_L - out_evt-> F2DPPAC_R);
+<             if(out_evt-> F2UPPAC_L>0 && out_evt-> F2UPPAC_R>0) 
+< 	      F2_u_ppac_pos_X->Fill(out_evt-> F2UPPAC_L - out_evt-> F2UPPAC_R);
+<             if(out_evt-> F2DPPAC_D>0 && out_evt-> F2DPPAC_U>0)
+< 	      F2_d_ppac_pos_Y->Fill(out_evt-> F2DPPAC_D - out_evt-> F2DPPAC_U);
+<             if(out_evt-> F2UPPAC_D>0 && out_evt-> F2UPPAC_U>0) 
+< 	      F2_u_ppac_pos_Y->Fill(out_evt-> F2UPPAC_D - out_evt-> F2UPPAC_U);
+< 	    
+< 	    if(out_evt-> F3UPPAC_L>0 && out_evt-> F3UPPAC_R>0)	      
+< 	      F3_u_ppac_pos_X->Fill(out_evt-> F3UPPAC_L - out_evt-> F3UPPAC_R);
+1014,1017c956,960
+< 	    // 28052014 TETSUYA ADD
+< 	    if(out_evt-> F3UPPAC_L>0 && out_evt-> F3UPPAC_R>0)	      
+< 	      F3_d_ppac_pos_X->Fill(out_evt-> F3UPPAC_L - out_evt-> F3UPPAC_R);
+< 	    // -------------------------
+---
+> 	    if(out_evt-> F2DPPAC_L>0 && out_evt-> F2DPPAC_R>0) F2_d_ppac_pos_X->Fill(out_evt-> F2DPPAC_L - out_evt-> F2DPPAC_R);
+>             if(out_evt-> F2UPPAC_L>0 && out_evt-> F2UPPAC_R>0) F2_u_ppac_pos_X->Fill(out_evt-> F2UPPAC_L - out_evt-> F2UPPAC_R);
+> 
+>             if(out_evt-> F2DPPAC_D>0 && out_evt-> F2DPPAC_U>0) F2_d_ppac_pos_Y->Fill(out_evt-> F2DPPAC_D - out_evt-> F2DPPAC_U);
+>             if(out_evt-> F2UPPAC_D>0 && out_evt-> F2UPPAC_U>0) F2_u_ppac_pos_Y->Fill(out_evt-> F2UPPAC_D - out_evt-> F2UPPAC_U);
+1019,1020c962,963
+< 	    if(out_evt-> F3UPPAC_D>0 && out_evt-> F3UPPAC_U>0)
+< 	      F3_u_ppac_pos_Y->Fill(out_evt-> F3UPPAC_D - out_evt-> F3UPPAC_U);  
+---
+> 	    if(out_evt-> F3UPPAC_L>0 && out_evt-> F3UPPAC_R>0) F3_u_ppac_pos_X->Fill(out_evt-> F3UPPAC_L - out_evt-> F3UPPAC_R);
+> 	    if(out_evt-> F3UPPAC_D>0 && out_evt-> F3UPPAC_U>0) F3_u_ppac_pos_Y->Fill(out_evt-> F3UPPAC_D - out_evt-> F3UPPAC_U);  
+1022,1025d964
+< 	    // 28052014 TETSUYA ADD
+< 	    if(out_evt-> F3UPPAC_D>0 && out_evt-> F3UPPAC_U>0)
+< 	      F3_d_ppac_pos_Y->Fill(out_evt-> F3UPPAC_D - out_evt-> F3UPPAC_U);  
+< 	    // -------------------------
+1027d965
+< 	    
+1031c969
+< 	      F2_u_ppac_pos->Fill(  out_evt-> F2UPPAC_L - out_evt-> F2UPPAC_R ,out_evt-> F2UPPAC_D - out_evt-> F2UPPAC_U      );
+---
+>                   F2_u_ppac_pos->Fill(  out_evt-> F2UPPAC_L - out_evt-> F2UPPAC_R ,out_evt-> F2UPPAC_D - out_evt-> F2UPPAC_U      );
+1033,1034c971,972
+< 	    if(out_evt->F2DPPAC_L>0 && out_evt->F2DPPAC_R>0 && out_evt-> F2DPPAC_U>0 &&  out_evt-> F2DPPAC_D>0)
+<              F2_d_ppac_pos->Fill(out_evt-> F2DPPAC_L - out_evt-> F2DPPAC_R ,out_evt-> F2DPPAC_D - out_evt-> F2DPPAC_U      );
+---
+>            if(out_evt->F2DPPAC_L>0 && out_evt->F2DPPAC_R>0 && out_evt-> F2DPPAC_U>0 &&  out_evt-> F2DPPAC_D>0)
+>              F2_d_ppac_pos->Fill(  out_evt-> F2DPPAC_L - out_evt-> F2DPPAC_R ,out_evt-> F2DPPAC_D - out_evt-> F2DPPAC_U      );
+1038,1044c976
+< 	    // 28052014 TETSUYA ADD 
+< 	    if(out_evt->F3DPPAC_L>0 && out_evt->F3DPPAC_R>0 && out_evt-> F3DPPAC_U>0 &&  out_evt-> F3DPPAC_D>0)
+< 	      F3_d_ppac_pos->Fill(out_evt-> F3DPPAC_L - out_evt-> F3DPPAC_R ,out_evt-> F3DPPAC_D - out_evt-> F3DPPAC_U      );
+< 	    // -------------------------
+< 	    
+< 	    F2_Sil->Fill(out_evt-> F2_Silicon);
+< 	    //	    F3_Sil->Fill(out_evt-> F3_Silicon); // 28052014 TETSUYA ADD  CHK
+---
+> 	     
+1045a978,979
+> 	    F2_Sil->Fill(out_evt-> F2_Silicon);
+> 	    
+1048a983,984
+> 	   
+> 	    
+1053,1056c989,995
+< 	    
+< 	    // Yassid 06112013 17:58 TPCSi histograms E419  
+< 	    // NB: We have to do it one by one until we fill each ntuple in an array
+< 	    
+---
+> 
+> 
+> 
+> 
+> 	    // Yassid 06112013 17:58 TPCSi histograms E419  NB: We have to do it one by one until we fill each ntuple in an array
+> 
+> 
+1072d1010
+< 	    
+1078d1015
+< 	    // Yassid 29082013 Sorting for Hodoscope
+1079a1017,1018
+> 	    // Yassid 29082013 Sorting for Hodoscope
+> 	    
+1081,1083c1020,1022
+< 
+< 
+< 
+---
+> 	       
+> 	       
+> 	       
+1088,1104c1027,1043
+< 	       
+< 	       
+< 	       out_evt-> HODO_dE_UQ[i] = inp_evt-> sva01[20][i];
+< 	       Hodo_DE_u_q[i]->Fill(inp_evt-> sva01[20][i]);
+< 	       out_evt-> HODO_dE_DQ[i] = inp_evt-> sva01[20][i+16];
+< 	       Hodo_DE_d_q[i]->Fill(inp_evt-> sva01[20][i+16]);
+< 	       
+< 	       
+< 	       out_evt-> HODO_E2_LT[i] = inp_evt-> sva01[14][i];
+< 	       Hodo_ETWO_l_t[i]->Fill(inp_evt-> sva01[14][i]);
+< 	       out_evt-> HODO_E2_RT[i] = inp_evt-> sva01[14][i+16];
+< 	       Hodo_ETWO_r_t[i]->Fill(inp_evt-> sva01[14][i+16]);
+< 	       
+< 	       out_evt-> HODO_E2_LQ[i] = inp_evt-> sva01[18][i];
+< 	       Hodo_ETWO_l_q[i]->Fill(inp_evt-> sva01[18][i]);
+< 	       out_evt-> HODO_E2_RQ[i] = inp_evt-> sva01[18][i+16];
+< 	       Hodo_ETWO_r_q[i]->Fill(inp_evt-> sva01[18][i+16]);
+---
+> 
+> 
+>     out_evt-> HODO_dE_UQ[i] = inp_evt-> sva01[20][i];
+>     Hodo_DE_u_q[i]->Fill(inp_evt-> sva01[20][i]);
+>     out_evt-> HODO_dE_DQ[i] = inp_evt-> sva01[20][i+16];
+>     Hodo_DE_d_q[i]->Fill(inp_evt-> sva01[20][i+16]);
+> 
+>  
+>     out_evt-> HODO_E2_LT[i] = inp_evt-> sva01[14][i];
+>     Hodo_ETWO_l_t[i]->Fill(inp_evt-> sva01[14][i]);
+>     out_evt-> HODO_E2_RT[i] = inp_evt-> sva01[14][i+16];
+>     Hodo_ETWO_r_t[i]->Fill(inp_evt-> sva01[14][i+16]);
+> 
+>     out_evt-> HODO_E2_LQ[i] = inp_evt-> sva01[18][i];
+>     Hodo_ETWO_l_q[i]->Fill(inp_evt-> sva01[18][i]);
+>     out_evt-> HODO_E2_RQ[i] = inp_evt-> sva01[18][i+16];
+>     Hodo_ETWO_r_q[i]->Fill(inp_evt-> sva01[18][i+16]);
+1112,1142c1051
+< 	       // Yassid 06092013 We add Position and Energy for quick test, that should be implemented in the next step Cal/Anl TODO
+< 	       
+< 	       Hodo_DE_pos[i]->Fill(inp_evt-> sva01[16][i]  -   inp_evt->sva01[16][i+16]   );
+< 	       Hodo_ETWO_pos[i]->Fill(inp_evt-> sva01[14][i]  - inp_evt-> sva01[14][i+16]    );
+< 	       
+< 	       Hodo_DE_E[i]->Fill(sqrt (inp_evt-> sva01[20][i]*inp_evt-> sva01[20][i+16])  );
+< 	       Hodo_ETWO_E[i]->Fill(sqrt (inp_evt-> sva01[18][i]*inp_evt-> sva01[18][i+16])  );  
+< 	       
+< 	       } */
+< 	    
+< 	    
+< 	    // Filling multiplicity
+< 	    //HODO_dE_Mult->Fill(out_evt->HODO_dE_Hit++);
+< 	    //HODO_E2_Mult->Fill(out_evt->HODO_E2_Hit++);
+< 	    
+< 	    
+< 	    /*  for(int i=0;i<16;i++) {
+< 		
+< 		out_evt-> HODO_E1_LT[i] = inp_evt-> sva01[15][i];
+< 		Hodo_EONE_l_t[i]->Fill(inp_evt-> sva01[15][i]);
+< 		out_evt-> HODO_E1_RT[i] = inp_evt-> sva01[15][i+16];
+< 		Hodo_EONE_r_t[i]->Fill(inp_evt-> sva01[15][i+16]);
+< 		
+< 		out_evt-> HODO_E1_LQ[i] = inp_evt-> sva01[19][i];
+< 		Hodo_EONE_l_q[i]->Fill(inp_evt-> sva01[19][i]);
+< 		out_evt-> HODO_E1_RQ[i] = inp_evt-> sva01[19][i+16];
+< 		Hodo_EONE_r_q[i]->Fill(inp_evt-> sva01[19][i+16]);
+< 		
+< 		Hodo_EONE_pos[i]->Fill(inp_evt-> sva01[15][i] - inp_evt-> sva01[15][i+16]     );
+< 		Hodo_EONE_E[i]->Fill(sqrt (inp_evt-> sva01[19][i]*inp_evt-> sva01[19][i+16])  ); 
+< 		
+---
+>     // Yassid 06092013 We add Position and Energy for quick test, that should be implemented in the next step Cal/Anl TODO
+1143a1053,1054
+>       Hodo_DE_pos[i]->Fill(inp_evt-> sva01[16][i]  -   inp_evt->sva01[16][i+16]   );
+>       Hodo_ETWO_pos[i]->Fill(inp_evt-> sva01[14][i]  - inp_evt-> sva01[14][i+16]    );
+1144a1056,1065
+>       Hodo_DE_E[i]->Fill(sqrt (inp_evt-> sva01[20][i]*inp_evt-> sva01[20][i+16])  );
+>       Hodo_ETWO_E[i]->Fill(sqrt (inp_evt-> sva01[18][i]*inp_evt-> sva01[18][i+16])  );  
+>    
+>  } */
+>  
+>  
+>  	// Filling multiplicity
+> 	//HODO_dE_Mult->Fill(out_evt->HODO_dE_Hit++);
+>  	//HODO_E2_Mult->Fill(out_evt->HODO_E2_Hit++);
+>  
+1146,1147c1067,1086
+< 		}*/
+< 	    
+---
+>    /*  for(int i=0;i<16;i++) {
+> 
+>     out_evt-> HODO_E1_LT[i] = inp_evt-> sva01[15][i];
+>     Hodo_EONE_l_t[i]->Fill(inp_evt-> sva01[15][i]);
+>     out_evt-> HODO_E1_RT[i] = inp_evt-> sva01[15][i+16];
+>     Hodo_EONE_r_t[i]->Fill(inp_evt-> sva01[15][i+16]);
+> 
+>     out_evt-> HODO_E1_LQ[i] = inp_evt-> sva01[19][i];
+>     Hodo_EONE_l_q[i]->Fill(inp_evt-> sva01[19][i]);
+>     out_evt-> HODO_E1_RQ[i] = inp_evt-> sva01[19][i+16];
+>     Hodo_EONE_r_q[i]->Fill(inp_evt-> sva01[19][i+16]);
+> 
+>     Hodo_EONE_pos[i]->Fill(inp_evt-> sva01[15][i] - inp_evt-> sva01[15][i+16]     );
+>     Hodo_EONE_E[i]->Fill(sqrt (inp_evt-> sva01[19][i]*inp_evt-> sva01[19][i+16])  ); 
+>     
+>     
+> 
+> 
+>      }*/
+>      
+1151,1152c1090,1091
+< 	    // Yassid 18092013 Sorting for Si+CsI array 
+< 	    // Yassid 26092013 New Si+CsI Sorting
+---
+>      // Yassid 18092013 Sorting for Si+CsI array 
+>      // Yassid 26092013 New Si+CsI Sorting
+1154c1093
+< 	    /*  for(int i=0;i<16;i++) {
+---
+>    /*  for(int i=0;i<16;i++) {
+1158,1159c1097,1098
+< 		out_evt-> DSSD_1_b[31-(2*i)] = inp_evt->vmi01[8][i];
+< 		DSSD_1_bias[31-(2*i)]->Fill(out_evt-> DSSD_1_b[31-(2*i)] );
+---
+>           out_evt-> DSSD_1_b[31-(2*i)] = inp_evt->vmi01[8][i];
+>           DSSD_1_bias[31-(2*i)]->Fill(out_evt-> DSSD_1_b[31-(2*i)] );
+1161,1162c1100,1101
+< 		out_evt-> DSSD_1_g[30-(2*i)] = inp_evt->vmi01[9][i];
+< 		DSSD_1_ground[30-(2*i)]->Fill(out_evt->DSSD_1_g[30-(2*i)]);
+---
+>           out_evt-> DSSD_1_g[30-(2*i)] = inp_evt->vmi01[9][i];
+>           DSSD_1_ground[30-(2*i)]->Fill(out_evt->DSSD_1_g[30-(2*i)]);
+1164,1165c1103,1104
+< 		out_evt-> DSSD_2_b[31-(2*i)] = inp_evt->vmi01[10][i];
+< 		DSSD_2_bias[31-(2*i)]->Fill(out_evt->DSSD_2_b[31-(2*i)] );
+---
+>           out_evt-> DSSD_2_b[31-(2*i)] = inp_evt->vmi01[10][i];
+>           DSSD_2_bias[31-(2*i)]->Fill(out_evt->DSSD_2_b[31-(2*i)] );
+1168,1169c1107,1108
+< 		out_evt-> DSSD_2_g[31-(2*i)] = inp_evt->vmi01[11][i];
+< 		DSSD_2_ground[31-(2*i)]->Fill(out_evt->DSSD_2_g[31-(2*i)]);  
+---
+>           out_evt-> DSSD_2_g[31-(2*i)] = inp_evt->vmi01[11][i];
+> 	  DSSD_2_ground[31-(2*i)]->Fill(out_evt->DSSD_2_g[31-(2*i)]);  
+1171,1172c1110,1111
+< 		out_evt-> DSSD_3_b[30-(2*i)] = inp_evt->vmi01[12][i];
+< 		DSSD_3_bias[30-(2*i)]->Fill(out_evt->DSSD_3_b[30-(2*i)]); 
+---
+>           out_evt-> DSSD_3_b[30-(2*i)] = inp_evt->vmi01[12][i];
+>           DSSD_3_bias[30-(2*i)]->Fill(out_evt->DSSD_3_b[30-(2*i)]); 
+1174,1175c1113,1114
+< 		out_evt-> DSSD_3_g[31-(2*i)] = inp_evt-> vmi01[13][i];
+< 		DSSD_3_ground[31-(2*i)]->Fill(out_evt-> DSSD_3_g[31-(2*i)]);   
+---
+>           out_evt-> DSSD_3_g[31-(2*i)] = inp_evt-> vmi01[13][i];
+>           DSSD_3_ground[31-(2*i)]->Fill(out_evt-> DSSD_3_g[31-(2*i)]);   
+1178,1179c1117,1118
+< 		out_evt-> DSSD_4_b[2*i+1]					 = inp_evt-> vmi01[15][i];
+< 		DSSD_4_bias[2*i+1]->Fill(out_evt-> DSSD_4_b[2*i+1]);	// 2*i+1 = 2
+---
+>           out_evt-> DSSD_4_b[2*i+1]					 = inp_evt-> vmi01[15][i];
+> 	  DSSD_4_bias[2*i+1]->Fill(out_evt-> DSSD_4_b[2*i+1]);	// 2*i+1 = 2
+1181,1182c1120,1121
+< 		out_evt-> DSSD_4_g[2*i] = inp_evt-> vmi01[16][i];     
+< 		DSSD_4_ground[2*i]->Fill(out_evt-> DSSD_4_g[2*i]);	// 
+---
+> 	  out_evt-> DSSD_4_g[2*i] = inp_evt-> vmi01[16][i];     
+> 	  DSSD_4_ground[2*i]->Fill(out_evt-> DSSD_4_g[2*i]);	// 
+1185,1186c1124,1125
+< 		out_evt-> DSSD_5_b[2*i+1] = inp_evt-> vmi01[18][i];
+< 		DSSD_5_bias[2*i+1]->Fill(out_evt-> DSSD_5_b[2*i+1]);  
+---
+>           out_evt-> DSSD_5_b[2*i+1] = inp_evt-> vmi01[18][i];
+> 	  DSSD_5_bias[2*i+1]->Fill(out_evt-> DSSD_5_b[2*i+1]);  
+1188,1189c1127,1128
+< 		out_evt-> DSSD_5_g[2*i] = inp_evt-> vmi01[17][i];     
+< 		DSSD_5_ground[2*i]->Fill(out_evt-> DSSD_5_g[2*i]);
+---
+>           out_evt-> DSSD_5_g[2*i] = inp_evt-> vmi01[17][i];     
+> 	  DSSD_5_ground[2*i]->Fill(out_evt-> DSSD_5_g[2*i]);
+1191,1192c1130,1131
+< 		out_evt-> DSSD_6_b[31-(2*i)] = inp_evt-> vmi01[14][i];     
+< 		DSSD_6_bias[31-(2*i)]->Fill(out_evt-> DSSD_6_b[31-(2*i)]);
+---
+> 	  out_evt-> DSSD_6_b[31-(2*i)] = inp_evt-> vmi01[14][i];     
+> 	  DSSD_6_bias[31-(2*i)]->Fill(out_evt-> DSSD_6_b[31-(2*i)]);
+1194,1195c1133,1134
+< 		out_evt-> DSSD_6_b[30-(2*i)] = inp_evt-> vmi01[14][i];     
+< 		DSSD_6_bias[30-(2*i)]->Fill( out_evt-> DSSD_6_b[30-(2*i)]);   
+---
+>           out_evt-> DSSD_6_b[30-(2*i)] = inp_evt-> vmi01[14][i];     
+> 	  DSSD_6_bias[30-(2*i)]->Fill( out_evt-> DSSD_6_b[30-(2*i)]);   
+1201,1202c1140,1141
+< 		out_evt-> DSSD_1_b[30-(2*i)] = inp_evt-> vmi01[8][i+16];
+< 		DSSD_1_bias[30-(2*i)]->Fill(out_evt-> DSSD_1_b[30-(2*i)]);
+---
+> 	  out_evt-> DSSD_1_b[30-(2*i)] = inp_evt-> vmi01[8][i+16];
+>           DSSD_1_bias[30-(2*i)]->Fill(out_evt-> DSSD_1_b[30-(2*i)]);
+1204,1205c1143,1144
+< 		out_evt-> DSSD_1_g[31-(2*i)] = inp_evt-> vmi01[9][i+16];
+< 		DSSD_1_ground[31-(2*i)]->Fill(out_evt-> DSSD_1_g[31-(2*i)]);
+---
+> 	  out_evt-> DSSD_1_g[31-(2*i)] = inp_evt-> vmi01[9][i+16];
+>           DSSD_1_ground[31-(2*i)]->Fill(out_evt-> DSSD_1_g[31-(2*i)]);
+1207,1208c1146,1147
+< 		out_evt-> DSSD_2_b[30-(2*i)] = inp_evt-> vmi01[10][i+16];
+< 		DSSD_2_bias[30-(2*i)]->Fill(out_evt-> DSSD_2_b[30-(2*i)]);
+---
+>           out_evt-> DSSD_2_b[30-(2*i)] = inp_evt-> vmi01[10][i+16];
+>           DSSD_2_bias[30-(2*i)]->Fill(out_evt-> DSSD_2_b[30-(2*i)]);
+1211,1212c1150,1151
+< 		out_evt-> DSSD_2_g[30-(2*i)] = inp_evt-> vmi01[11][i+16];
+< 		DSSD_2_ground[30-(2*i)]->Fill(out_evt-> DSSD_2_g[30-(2*i)]);  
+---
+>           out_evt-> DSSD_2_g[30-(2*i)] = inp_evt-> vmi01[11][i+16];
+> 	  DSSD_2_ground[30-(2*i)]->Fill(out_evt-> DSSD_2_g[30-(2*i)]);  
+1214,1215c1153,1154
+< 		out_evt-> DSSD_3_b[31-(2*i)] = inp_evt-> vmi01[12][i+16];
+< 		DSSD_3_bias[31-(2*i)]->Fill(out_evt-> DSSD_3_b[31-(2*i)]); 
+---
+>           out_evt-> DSSD_3_b[31-(2*i)] = inp_evt-> vmi01[12][i+16];
+>           DSSD_3_bias[31-(2*i)]->Fill(out_evt-> DSSD_3_b[31-(2*i)]); 
+1217,1218c1156,1157
+< 		out_evt-> DSSD_3_g[30-(2*i)] = inp_evt-> vmi01[13][i+16];
+< 		DSSD_3_ground[30-(2*i)]->Fill(out_evt-> DSSD_3_g[30-(2*i)]);   
+---
+> 	  out_evt-> DSSD_3_g[30-(2*i)] = inp_evt-> vmi01[13][i+16];
+>           DSSD_3_ground[30-(2*i)]->Fill(out_evt-> DSSD_3_g[30-(2*i)]);   
+1221,1222c1160,1161
+< 		out_evt-> DSSD_4_b[2*i] = inp_evt-> vmi01[15][i+16];
+< 		DSSD_4_bias[2*i]->Fill(out_evt-> DSSD_4_b[2*i]);  
+---
+>           out_evt-> DSSD_4_b[2*i] = inp_evt-> vmi01[15][i+16];
+> 	  DSSD_4_bias[2*i]->Fill(out_evt-> DSSD_4_b[2*i]);  
+1224,1225c1163,1164
+< 		out_evt-> DSSD_4_g[2*i+1] = inp_evt-> vmi01[16][i+16];     
+< 		DSSD_4_ground[2*i+1]->Fill(out_evt-> DSSD_4_g[2*i+1]); 
+---
+> 	  out_evt-> DSSD_4_g[2*i+1] = inp_evt-> vmi01[16][i+16];     
+> 	  DSSD_4_ground[2*i+1]->Fill(out_evt-> DSSD_4_g[2*i+1]); 
+1228,1229c1167,1168
+< 		out_evt-> DSSD_5_b[2*i] = inp_evt-> vmi01[18][i+16];
+< 		DSSD_5_bias[2*i]->Fill(out_evt->DSSD_5_b[2*i]);  
+---
+>           out_evt-> DSSD_5_b[2*i] = inp_evt-> vmi01[18][i+16];
+> 	  DSSD_5_bias[2*i]->Fill(out_evt->DSSD_5_b[2*i]);  
+1231,1232c1170,1171
+< 		out_evt-> DSSD_5_g[2*i+1] = inp_evt-> vmi01[17][i+16];     
+< 		DSSD_5_ground[2*i+1]->Fill(out_evt->DSSD_5_g[2*i+1]);
+---
+> 	  out_evt-> DSSD_5_g[2*i+1] = inp_evt-> vmi01[17][i+16];     
+> 	  DSSD_5_ground[2*i+1]->Fill(out_evt->DSSD_5_g[2*i+1]);
+1234,1235c1173,1174
+< 		out_evt-> DSSD_6_g[31-(2*i)] = inp_evt->vmi01[14][i+16];     
+< 		DSSD_6_ground[31-(2*i)]->Fill(out_evt->DSSD_6_g[31-(2*i)]);
+---
+> 	  out_evt-> DSSD_6_g[31-(2*i)] = inp_evt->vmi01[14][i+16];     
+> 	  DSSD_6_ground[31-(2*i)]->Fill(out_evt->DSSD_6_g[31-(2*i)]);
+1237,1238c1176,1177
+< 		out_evt-> DSSD_6_g[30-(2*i)] = inp_evt->vmi01[14][i+16];     
+< 		DSSD_6_ground[30-(2*i)]->Fill(out_evt->DSSD_6_g[30-(2*i)]);
+---
+> 	  out_evt-> DSSD_6_g[30-(2*i)] = inp_evt->vmi01[14][i+16];     
+> 	  DSSD_6_ground[30-(2*i)]->Fill(out_evt->DSSD_6_g[30-(2*i)]);
+1243c1182
+< 		}*/
+---
+>         }*/
+1246c1185
+< 	    /*for(int i=0;i<4;i++){
+---
+> 	/*for(int i=0;i<4;i++){
+1248,1249c1187,1188
+< 	      out_evt-> CsI_1[i] = inp_evt -> vmi01[19][i];
+< 	      CSI_E_1[i]->Fill(out_evt-> CsI_1[i]);
+---
+> 	out_evt-> CsI_1[i] = inp_evt -> vmi01[19][i];
+> 	CSI_E_1[i]->Fill(out_evt-> CsI_1[i]);
+1252,1253c1191,1192
+< 	      out_evt-> CsI_2[i] = inp_evt -> vmi01[19][i+4];
+< 	      CSI_E_2[i]->Fill(out_evt-> CsI_2[i]);
+---
+> 	out_evt-> CsI_2[i] = inp_evt -> vmi01[19][i+4];
+> 	CSI_E_2[i]->Fill(out_evt-> CsI_2[i]);
+1256,1257c1195,1196
+< 	      out_evt-> CsI_3[i] = inp_evt -> vmi01[19][i+8];
+< 	      CSI_E_3[i]->Fill(out_evt-> CsI_3[i]);
+---
+> 	out_evt-> CsI_3[i] = inp_evt -> vmi01[19][i+8];
+> 	CSI_E_3[i]->Fill(out_evt-> CsI_3[i]);
+1260,1261c1199,1200
+< 	      out_evt-> CsI_4[i] = inp_evt -> vmi01[19][i+12];
+< 	      CSI_E_4[i]->Fill(out_evt-> CsI_4[i]);
+---
+> 	out_evt-> CsI_4[i] = inp_evt -> vmi01[19][i+12];
+> 	CSI_E_4[i]->Fill(out_evt-> CsI_4[i]);
+1263,1264c1202,1203
+< 	      out_evt-> CsI_5[i] = inp_evt -> vmi01[19][i+16];
+< 	      CSI_E_5[i]->Fill(out_evt-> CsI_5[i]);
+---
+> 	out_evt-> CsI_5[i] = inp_evt -> vmi01[19][i+16];
+> 	CSI_E_5[i]->Fill(out_evt-> CsI_5[i]);
+1266,1267c1205,1206
+< 	      out_evt-> CsI_6[i] = inp_evt -> vmi01[19][i+24];
+< 	      CSI_E_6[i]->Fill(out_evt-> CsI_6[i]);
+---
+> 	out_evt-> CsI_6[i] = inp_evt -> vmi01[19][i+24];
+> 	CSI_E_6[i]->Fill(out_evt-> CsI_6[i]);
+1269c1208
+< 	      }*/
+---
+> 	}*/
+1272c1211
+< 	    /*for(int i=0;i<6;i++) {
+---
+> 	/*for(int i=0;i<6;i++) {
+1274,1275c1213,1214
+< 	      out_evt -> SSD[i] = inp_evt -> vmi01[20][i];
+< 	      SSD_E[i]-> Fill(out_evt -> SSD[i]);
+---
+> 	out_evt -> SSD[i] = inp_evt -> vmi01[20][i];
+> 	SSD_E[i]-> Fill(out_evt -> SSD[i]);
+1278c1217
+< 	      }*/
+---
+> 	}*/
+1281c1220
+< 	    // out_evt->frData[cnt++] = inp_evt->fiCrate2[ii];
+---
+>      // out_evt->frData[cnt++] = inp_evt->fiCrate2[ii];
+1284,1288c1223,1227
+< 	    /*  if(out_evt->frData[ii]) {
+< 		if(fWinCon && fWinCon->Test(out_evt->frData[ii])) fSum1->Fill(out_evt->frData[ii]);
+< 		fSum2->Fill(out_evt->frData[ii]);
+< 		fSum3->Fill(out_evt->frData[ii]);
+< 		}*/
+---
+>    /*  if(out_evt->frData[ii]) {
+>         if(fWinCon && fWinCon->Test(out_evt->frData[ii])) fSum1->Fill(out_evt->frData[ii]);
+>         fSum2->Fill(out_evt->frData[ii]);
+>         fSum3->Fill(out_evt->frData[ii]);
+> 	}*/
+1290,1292c1229,1231
+< 	    // see comments in UnpackProc
+< 	    out_evt->SetValid(isValid);
+< 	    return isValid;
+---
+>    // see comments in UnpackProc
+>    out_evt->SetValid(isValid);
+>    return isValid;
