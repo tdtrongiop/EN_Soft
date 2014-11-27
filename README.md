@@ -1,4 +1,5 @@
-EN_Soft : Analysis software for EN Course experiments (RCNP Osaka University)
+EN_Soft 
+Analysis software for EN Course experiments (RCNP Osaka University)
 
 Developers:
 
