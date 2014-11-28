@@ -1,6 +1,6 @@
   class TArtRawEventObject;
   class TArtRawSegmentObject;
-  class ENPPAC_Calibration;
+  class EN_PPAC_Cal;
   class ENFiberCal;
 //  class TString;
 #include "TArtEventStore.hh"
@@ -9,7 +9,7 @@
   TArtEventStore *estore;
   TArtRawEventObject *rawevent;
   TArtRawSegmentObject *seg; 
-  ENPPAC_Calibration *ppac; 
+  EN_PPAC_Cal *ppac; 
   ENFiberCal *fiber;
   struct mapping{
     int cad;
@@ -24,6 +24,7 @@
   };
   mapping ENraw[1000];
   int numch,f1fiberFlag,f2ppacFlag,f3ppacFlag;
+  int f1fiber_ch,f2ppac_ch,f3ppac_ch;
   ifstream fi;  
   string	rawpath;
   char	runname[20];   

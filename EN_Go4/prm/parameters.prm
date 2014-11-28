@@ -1,8 +1,11 @@
 # mapping file
-mapping.map
+../map/mapping.map
 # Histogram
-standard_hist.hist
+../Histogram/standard_hist.hist
+
+
+
 # Fiber parameter
-fiber.prm
+ prm/fiber.prm
 # PPAC prm
-ppac.prm
+prm/ppac.prm

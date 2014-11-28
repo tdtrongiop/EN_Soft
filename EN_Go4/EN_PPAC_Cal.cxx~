@@ -53,7 +53,7 @@ void   EN_PPAC_Cal::ENcode(int raw[10][10][256], double val[10][10][256], int nv
 }
 // ***********************************************************************
 void   EN_PPAC_Cal::SetPosition(int ppacNo, int Left,int Right,int Down,int Up, int Anode ){
-  if (flagprm<0) printf("EN_PPAC:     Khong doc dc prm file\n");
+  if (flagprm<0) printf("  Khong doc dc prm file\n");
   traw[ppacNo][0]=Left;
   traw[ppacNo][1]=Down;
   traw[ppacNo][2]=Right;
